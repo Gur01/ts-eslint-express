@@ -1,18 +1,15 @@
-import express from 'express';
+import express, { Application } from 'express';
+import router from './routes';
 
-const app:express.Application = express();
+const app: Application = express();
 let port = 4000;
 
-app.get('/', (req:express.Request, res:express.Response) => {
-  res.send('Hello World');
-});
+app.use('/api/countries', router.countries);
 
 const connect = (currentPort: number) => {
-  // eslint-disable-next-line no-console
   app.listen(currentPort, () => console.log(`Listening on port ${currentPort}`));
 };
-
-process.on('uncaughtException', (error:any) => {
+process.on('uncaughtException', (error: any) => {
   if (error.code === 'EADDRINUSE') {
     port += 1;
     connect(port);

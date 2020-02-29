@@ -4,7 +4,7 @@ import router from './routes';
 const app: Application = express();
 let port = 4000;
 
-app.use('/api/countries', router.countries);
+app.use('/', router.countries);
 
 const connect = (currentPort: number) => {
     app.listen(currentPort, () => console.log(`Listening on port ${currentPort}`));
